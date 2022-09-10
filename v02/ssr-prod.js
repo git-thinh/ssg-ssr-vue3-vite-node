@@ -51,8 +51,4 @@ export async function __createServer() {
 	return app;
 }
 
-__createServer().then(app =>
-	app.listen(__PORT, () => {
-		console.log(`http://localhost:${__BASE}`)
-	})
-)
+__createServer().then(app => app.listen(__PORT, () => console.log(`\n\t\t http://localhost:${__PORT} \n\n`)))

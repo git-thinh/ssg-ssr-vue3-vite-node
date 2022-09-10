@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node ssr-dev",
-    "prod": "node ssr-prod",
+    "prod": "npm run build && node ssr-prod",
     "view": "serve ./dist/static -p 12345",
     "build": "npm run build:client && npm run build:server",
     "build:noExternal": "npm run build:client && npm run build:server:noExternal",

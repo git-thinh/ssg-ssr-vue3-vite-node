@@ -1,13 +1,13 @@
 <template>
-  <ExampleExternalComponent />
+	<ExampleExternalComponent />
 </template>
 
 <script>
-import ExampleExternalComponent from 'example-external-component'
+	import ExampleExternalComponent from 'example-external-component'
 
-export default {
-  components: {
-    ExampleExternalComponent
-  }
-}
+	export default {
+		components: {
+			ExampleExternalComponent
+		}
+	}
 </script>

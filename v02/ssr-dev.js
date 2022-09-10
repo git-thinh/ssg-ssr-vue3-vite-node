@@ -69,8 +69,4 @@ export async function createServer(root = process.cwd(), hmrPort) {
 	return app
 }
 
-createServer().then(app =>
-	app.listen(12345, () => {
-		console.log('http://localhost:12345')
-	})
-)
+createServer().then(app => app.listen(__PORT, () => console.log(`\n\t\t http://localhost:${__PORT} \n\n`)))
