@@ -5,6 +5,9 @@ import {
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+
 const virtualFile = '@virtual-file'
 const virtualId = '\0' + virtualFile
 const nestedVirtualFile = '@nested-virtual-file'
@@ -22,9 +25,164 @@ export default defineConfig(({
 	ssrBuild
 }) => ({
 	base,
+		
 	plugins: [
 		vuePlugin(),
 		vueJsx(),
+		
+		// https://github.com/antfu/unplugin-auto-import
+		// AutoImport({
+		//   imports: [
+		//     'vue',
+		//     'vue-router',
+		//   ],      
+		//   dts: 'src/auto-imports.d.ts'
+		// }),
+		
+		// https://github.com/antfu/unplugin-auto-import
+		AutoImport({
+			include: [/\.ts$/, /\.vue$/, /\.md$/],
+			imports: [
+				//'vue',
+				//'vue-router',
+				//'vue/macros',
+				//'@vueuse/head',
+				//'@vueuse/sound',
+				//'@vueuse/core',
+		
+				{
+					'vue': ['createSSRApp', 'useSSRContext', 'ref', 'reactive','defineAsyncComponent'],
+					'@vueuse/core': ['useElementVisibility'],
+					
+					// '@vueuse/head': ['head'],
+					// '@nuxt/devalue': ['devalue'],
+					// 'pinia': ['createPinia'],		
+					// '~/router': ['createRouter'],
+					// '~/store/page': ['usePageStore'],
+				},
+		
+				// 		{
+				// 			'@vueuse/core': [
+				// 				// https://vueuse.org/guide/
+				// 				// import { useMouse } from '@vueuse/core',
+				// 				'useScriptTag',//https://vueuse.org/core/useScriptTag/
+				// 				'useNetwork', 'useOnline',
+				// 				'useClipboard',
+				// 				'useFullscreen', //https://vueuse.org/core/useFullscreen/#demo
+				// 				'useObjectUrl', //https://vueuse.org/core/useObjectUrl/#usage
+				// 				'useFileDialog', //https://vueuse.org/core/useFileDialog/#demo
+				// 				'useFileSystemAccess', //https://vueuse.org/core/useFileSystemAccess/#demo
+				// 				'useEyeDropper', //https://vueuse.org/core/useEyeDropper/#component-usage
+				// 				'useCssVar', 'useDark', 'useToggle', 'useMouse', 'onClickOutside', 'useConfirmDialog',
+				// 				'useMediaControls', //https://vueuse.org/core/useMediaControls/
+				// 				'useImage', 'useInfiniteScroll', 'useMouseInElement',
+				// 				'useElementVisibility', 'useDocumentVisibility',
+				// 				'useDevicesList', 'useUserMedia', 'useSpeechRecognition', 'useSpeechSynthesis',
+				// 				// alias
+				// 				['useFetch', 'useMyFetch'], // import { useFetch as useMyFetch } from '@vueuse/core',
+				// 			],
+				// 			'@vueuse/sound': ['useSound'], //import { useSound } from '@vueuse/sound'
+		
+				// 			//'vue': ['defineComponent', 'computed'],
+				// 			//'~store/user': ['useUserStore'] 
+		
+				// 			'axios': [['default', 'axios']], //// import { default as axios } from 'axios',
+				// 			'vue-request': ['useRequest', 'usePagination'],
+		
+				// 			//'^/type/speech-types': ['__postApi'],
+		
+				// 			'♥/setup/AppSetup': ['AppSetup'],
+		
+				// 			'^/mixin/GlobalFunction': ['__getWindow', '__postApi'],
+				// 			'^/mixin/MixLayout': ['MixLayout'],
+				// 			'^/mixin/MixPage': ['MixPage'],
+				// 			'^/mixin/MixComponent': ['MixComponent'],
+				// 		},
+				// '[package-name]': [
+				// 	 '[import-names]',
+				// 	 ['[from]', '[alias]'],
+				// ],
+			],
+		
+			// Auto import for all module exports under directories
+			// dirs: [
+			// 	// './hooks',
+			// 	// './composables'
+			// 	// ...
+			// ],
+		
+			// Filepath to generate corresponding .d.ts file.
+			// Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
+			// Set `false` to disable.
+			dts: 'src/auto-imports.d.ts',
+			//dts: `src/${_projectCode}/auto-imports.d.ts`,
+		
+			// Auto import inside Vue template
+			// see https://github.com/unjs/unimport/pull/15
+			//vueTemplate: false,
+		
+			// Custom resolvers, compatible with `unplugin-vue-components`
+			// see https://github.com/antfu/unplugin-auto-import/pull/23/
+			//resolvers: [/* ... */],
+		}),
+		
+		// https://github.com/antfu/unplugin-vue-components
+		// Components({
+		// 	// relative paths to the directory to search for components
+		// 	dirs: ['src/**/components'],
+		// 	// allow auto load markdown components under `./src/components/`
+		// 	extensions: ['vue'],
+		// 	// allow auto import and register components used in markdown
+		// 	include: [/\.vue$/, /\.vue\?vue/],
+		// 	dts: 'src/components.d.ts'
+		// }),
+		// https://github.com/antfu/unplugin-vue-components
+		Components({
+			// relative paths to the directory to search for components.
+			dirs: [
+				`./src/Test`,
+				//`src/${_projectCode}/components`,
+				//`src/${_projectCode}/contents`,
+				//__pathRuntimeShared,
+				//__pathRuntimeProject,
+			],
+		
+			// search for subdirectories
+			deep: true,
+			// resolvers for custom components
+			resolvers: [],
+		
+			// generate `components.d.ts` global declarations,
+			// also accepts a path for custom filename
+			// default: `true` if package typescript is installed
+			dts: false,
+		
+			// Allow subdirectories as namespace prefix for components.
+			directoryAsNamespace: false,
+			// Subdirectory paths for ignoring namespace prefixes
+			// works when `directoryAsNamespace: true`
+			globalNamespaces: [],
+		
+			// auto import for directives
+			// default: `true` for Vue 3, `false` for Vue 2
+			// Babel is needed to do the transformation for Vue 2, it's disabled by default for performance concerns.
+			// To install Babel, run: `npm install -D @babel/parser`
+			directives: true,
+		
+			// Transform path before resolving
+			//importPathTransform: v => v,
+		
+			// Allow for components to override other components with the same name
+			allowOverrides: false,
+		
+			// valid file extensions for components.
+			extensions: ['vue'],
+			// filters for transforming targets
+			include: [/\.vue$/, /\.vue\?vue/],
+			exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
+		}),
+		
+		
 		{
 			name: 'virtual',
 			resolveId(id) {
@@ -42,6 +200,7 @@ export default defineConfig(({
 				}
 			}
 		},
+		
 		{
 			name: 'virtual-module',
 			resolveId(id) {
@@ -59,6 +218,7 @@ export default defineConfig(({
 				}
 			}
 		},
+		
 		// Example of a plugin that injects a helper from a virtual module that can
 		// be used in renderBuiltUrl
 		(function() {
@@ -104,6 +264,7 @@ export default defineConfig(({
 			}
 		})()
 	],
+	
 	experimental: {
 		renderBuiltUrl(filename, {
 			hostType,
@@ -117,6 +278,7 @@ export default defineConfig(({
 			}
 		}
 	},
+	
 	build: {
 		minify: false,
 		emptyOutDir: true,
