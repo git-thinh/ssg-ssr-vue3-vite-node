@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": "/test/",
+    "paths": {
+      "^runtimecom/*": ["../iot-runtime/src/templates/*"]
+    }
+  }
+}

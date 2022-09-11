@@ -1,3 +1,9 @@
 /v02/node_modules
 /v02/yarn.lock
 /v02/dist
+/v01/node_modules
+/v01/dist
+/v01/yarn.lock
+/iot-runtime/node_modules
+/iot-runtime/build
+/iot-runtime/yarn.lock

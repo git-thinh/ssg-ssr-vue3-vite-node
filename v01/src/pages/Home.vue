@@ -1,10 +1,15 @@
 <template>
 	<h1>Home</h1>
+	<!-- <iottest></iottest> -->
+	<!-- <component :is="loadRuntime('iottest')"></component> -->
+	<!-- <RuntimeDynamic :name="'iottest'"></RuntimeDynamic> -->
 	<p>
 		<img src="../assets/logo.png" alt="logo" />
 	</p>
 	<button @click="state.count++">count is: {{ state.count }}</button>
+
 	<Foo />
+
 	<p class="virtual">msg from virtual module: {{ foo.msg }}</p>
 	<p class="inter">this will be styled with a font-face</p>
 	<p class="import-meta-url">{{ state.url }}</p>
@@ -37,6 +42,14 @@
 	function load(file) {
 		return defineAsyncComponent(() => import(`../components/${file}.vue`))
 	}
+
+	function loadRuntime(file) {
+		//return defineAsyncComponent(() => import(`../../../iot-runtime/src/templates/${file}.vue`))
+		return defineAsyncComponent(() =>
+			//import(`D:/MMO/ssg-ssr-vue3-vite-node/iot-runtime/src/templates/${file}.vue`));
+			import(`^runtimecom/${file}.vue`));
+	}
+
 	const url =
 		import.meta.env.SSR ?
 		import.meta.url :
