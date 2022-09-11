@@ -7,12 +7,12 @@
     "dev": "node ssr-dev",
     "prod": "npm run build && node ssr-prod",
     "view": "serve ./dist/static -p 12345",
+    "gen": "vite build --ssrManifest --outDir dist/static/test && npm run build:server && node generate",
     "build": "npm run build:client && npm run build:server",
     "build:noExternal": "npm run build:client && npm run build:server:noExternal",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
     "build:server:noExternal": "vite build --config vite.config.noexternal.js --ssr src/entry-server.js --outDir dist/server",
-    "gen": "vite build --ssrManifest --outDir dist/static && npm run build:server && node prerender",
     "debug": "node --inspect-brk server"
   },
   "dependencies": {

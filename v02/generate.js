@@ -1,5 +1,4 @@
-// Pre-render the app into static HTML.
-// run `npm run generate` and then `dist/static` can be served as a static site.
+const __outDir  = 'dist/static/test'
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -7,8 +6,8 @@ import path from 'node:path'
 //const toAbsolute = (p) => path.resolve(__dirname, p)
 const toAbsolute = (p) => './' + p
 
-const manifest = JSON.parse(fs.readFileSync('./dist/static/ssr-manifest.json', 'utf8'))
-const template = fs.readFileSync(toAbsolute('dist/static/index.html'), 'utf-8')
+const manifest = JSON.parse(fs.readFileSync(`./${__outDir}/ssr-manifest.json`, 'utf8'))
+const template = fs.readFileSync(toAbsolute(`${__outDir}/index.html`), 'utf-8')
 const {
 	render
 } = await import('./dist/server/entry-server.js')
@@ -30,11 +29,11 @@ const routesToPrerender = fs
 			.replace(`<!--preload-links-->`, preloadLinks)
 			.replace(`<!--app-html-->`, appHtml)
 
-		const filePath = `dist/static${url === '/' ? '/index' : url}.html`
+		const filePath = `${__outDir}${url === '/' ? '/index' : url}.html`
 		fs.writeFileSync(toAbsolute(filePath), html)
 		console.log('pre-rendered:', filePath)
 	}
 
 	// done, delete ssr manifest
-	fs.unlinkSync(toAbsolute('dist/static/ssr-manifest.json'))
+	fs.unlinkSync(toAbsolute(`${__outDir}/ssr-manifest.json`))
 })()
