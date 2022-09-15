@@ -1,10 +1,15 @@
 import PATH from 'node:path'
-import { fileURLToPath, URL } from "node:url";
+import {
+	fileURLToPath,
+	URL
+} from "node:url";
 import {
 	defineConfig
 } from 'vite'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+
+import alias from '@rollup/plugin-alias'
 
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -21,18 +26,34 @@ const base = '/test/'
 globalThis.__vite_test_filename = __filename
 globalThis.__vite_test_dirname = __dirname
 
-let __pathRuntimeCom = PATH.resolve(__dirname, '../iot-runtime/src/templates/');
-let __pathRuntimeJs = PATH.resolve(__dirname, '../iot-runtime/src/js/');
-console.log(`>>>>> [ RUNTIME_PATH = ${__pathRuntimeCom} ]`);
+let __pathRuntime = PATH.resolve(__dirname, '../iot-runtime/src/');
+console.log(`>>>>> [ RUNTIME_PATH = ${__pathRuntime} ]`);
 
 export default defineConfig(({
 	command,
 	ssrBuild
 }) => ({
 	base,
-
+	
+	resolve: {
+		alias: {
+			//"@": resolve(projectRootDir, "src"),
+			'^': __pathRuntime,
+		},
+	},
+	
+	// resolve: {
+	// 	alias: {
+	// 		//'@': path.resolve(__dirname, './src')
+	// 		'^runtime': __pathRuntime,
+	// 		vue: 'vue/dist/vue.esm-bundler.js',
+	// 		//"@": fileURLToPath(new URL("./src", import.meta.url)),
+	// 		//"@": fileURLToPath(new URL("../iot-runtime/src", import.meta.url)),
+	// 	},
+	// },
 
 	plugins: [
+		alias(),
 		vuePlugin(),
 		vueJsx(),
 
@@ -273,16 +294,8 @@ export default defineConfig(({
 			}
 		})()
 	],
-	
-	// resolve: {
-	// 	alias: {
-	// 		//'@': path.resolve(__dirname, './src')
-	// 		'^runtimecom': __pathRuntimeCom
-	// 		//"@": fileURLToPath(new URL("./src", import.meta.url)),
-	// 		//"@": fileURLToPath(new URL("../iot-runtime/src", import.meta.url)),
-	// 	},
-	// },
-	
+
+
 	experimental: {
 		renderBuiltUrl(filename, {
 			hostType,

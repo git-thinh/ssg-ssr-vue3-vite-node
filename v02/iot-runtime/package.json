@@ -1,0 +1,25 @@
+{
+  "scripts": {
+    "build": "npm run compile:begin && npm run compile:build && npm run compile:end",
+    "compile:begin": "node ./compile-begin.js",
+    "compile:build": "vue-cli-service build --target lib --mode production --dest ./build --inline-vue --name ___iot ./src/interface.js",
+    "compile:end": "node ./compile-end.js",
+    "compile:run": "serve ./build -p 12345",
+    "--------------------------------------------": "",
+    "view": "serve ./build -p 12345",
+    "help": "vue-cli-service build --help",
+    "build1111": "vue-cli-service build --target lib --mode production --dest ./build --inline-vue --name ___iot src/interface.js",
+    "only-1-file-simple": "vue-cli-service build --report-json --target lib --mode production --dest ./build/test --name muitest ./src/MuiTest.vue",
+    "test:build": "vue-cli-service build --target lib --mode production --dest ./build/test --inline-vue --name ___iot test/testInterface.js"
+  },
+  "dependencies": {
+    "@vue/cli-service": "^5.0.4",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.1",
+    "serve": "^14.0.0",
+    "vue": "^2.6.14",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "devDependencies": {}
+}
