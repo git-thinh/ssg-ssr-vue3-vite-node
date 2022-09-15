@@ -1,22 +1,6 @@
 // Example of a plugin that injects a helper from a virtual module that can
 // be used in renderBuiltUrl
 
-const experimentalBuiltUrl = () => {
-	return {
-		renderBuiltUrl(filename, {
-			hostType,
-			type,
-			ssr
-		}) {
-			if (ssr && type === 'asset' && hostType === 'js') {
-				return {
-					runtime: `__ssr_vue_processAssetPath(${JSON.stringify(filename)})`
-				}
-			}
-		}
-	};
-}
-
 const pluginSSRBuiltUrl = (base) => {
 	const queryRE = /\?.*$/s
 	const hashRE = /#.*$/s
@@ -58,6 +42,22 @@ const pluginSSRBuiltUrl = (base) => {
 			}
 		}
 	}
+}
+
+const experimentalBuiltUrl = () => {
+	return {
+		renderBuiltUrl(filename, {
+			hostType,
+			type,
+			ssr
+		}) {
+			if (ssr && type === 'asset' && hostType === 'js') {
+				return {
+					runtime: `__ssr_vue_processAssetPath(${JSON.stringify(filename)})`
+				}
+			}
+		}
+	};
 }
 
 export {
