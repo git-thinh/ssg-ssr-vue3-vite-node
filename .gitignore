@@ -10,3 +10,4 @@
 /v02/runtime/build
 /v02/runtime/yarn.lock
 /v02/runtime/node_modules
+/v02/config/*.mjs

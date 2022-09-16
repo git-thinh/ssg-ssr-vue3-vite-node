@@ -29,7 +29,7 @@ export default defineConfig(async ({
 
   const base = '/test/'
   const root = process.cwd()
-  let __pathRuntimeCom = root + '/iot-runtime/src/templates/';
+  let __pathRuntimeCom = root + '/runtime/src/templates/';
   console.log('\nROOT = ', root);
   console.log(`RUNTIME = ${__pathRuntimeCom}`);
 
