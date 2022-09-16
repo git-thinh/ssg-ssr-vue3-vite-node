@@ -4,9 +4,7 @@ Vue.config.productionTip = false;
 
 
 
-import IotInput from "./templates/IotInput.vue";
-import IotMenu from "./templates/IotMenu.vue";
-import IotMenuBoxSearch from "./templates/IotMenuBoxSearch.vue";
+import Test from "./templates/Test.vue";
 
 
 export function __getComponent(name) {
@@ -14,9 +12,7 @@ export function __getComponent(name) {
     
 
 
-			case "IotInput": return IotInput;
-			case "IotMenu": return IotMenu;
-			case "IotMenuBoxSearch": return IotMenuBoxSearch;
+			case "Test": return Test;
 
   }
   return null;

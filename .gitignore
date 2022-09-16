@@ -7,3 +7,6 @@
 /iot-runtime/node_modules
 /iot-runtime/build
 /iot-runtime/yarn.lock
+/v02/runtime/build
+/v02/runtime/yarn.lock
+/v02/runtime/node_modules
