@@ -1,7 +1,7 @@
 <template>
   <h1>Test</h1>
   <hr>
-  <Runtime :name="'rtTest'" />
+  <Runtime :name="'Test'" />
   <hr>
   <component v-for="c in coms" :is="c"></component>
 </template>
@@ -10,7 +10,7 @@
   import {
     defineAsyncComponent
   } from 'vue'
-  import Runtime from '../components/runtime'
+  import Runtime from '@/src/runtime'
 
   function loadTest(file) {
     return defineAsyncComponent(() => import(`../Test/${file}.vue`))

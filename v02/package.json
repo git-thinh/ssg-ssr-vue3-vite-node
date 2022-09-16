@@ -20,7 +20,6 @@
 		"@vitejs/plugin-vue": "^3.1.0",
 		"@vitejs/plugin-vue-jsx": "^2.0.1",
 		"@vueuse/core": "^9.2.0",
-		"adm-zip": "^0.5.9",
 		"example-external-component": "file:example-external-component",
 		"lodash": "^4.17.21",
 		"serve": "^14.0.1",
@@ -30,6 +29,7 @@
 		"vuex": "^4.0.2"
 	},
 	"devDependencies": {
+		"adm-zip": "^0.5.9",
 		"compression": "^1.7.4",
 		"cross-env": "^7.0.3",
 		"dep-import-type": "link:./dep-import-type",

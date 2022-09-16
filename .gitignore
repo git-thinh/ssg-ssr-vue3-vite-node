@@ -11,3 +11,6 @@
 /v02/runtime/yarn.lock
 /v02/runtime/node_modules
 /v02/config/*.mjs
+/v02/iot/build
+/v02/iot/node_modules
+/v02/iot/*.lock

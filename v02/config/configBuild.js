@@ -32,6 +32,8 @@ const configBuild = (root) => {
         chunkFileNames: 'assets__/js/[name].js',
         entryFileNames: '[name].js',
       },
+	  //external: new Regexp('/_runtime/.*')
+	  external: (id) => id.startsWith('/_runtime/'),
     }
   };
 }
