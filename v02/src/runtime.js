@@ -1,11 +1,12 @@
 import {
 	h,
+	compile,
 	createVNode,
 	defineComponent,
 	resolveComponent,
 	defineAsyncComponent
 } from 'vue'
- 
+
 export default defineComponent({
 	props: {
 		name: {
@@ -18,28 +19,43 @@ export default defineComponent({
 		},
 	},
 	// render() {
-	// 	console.log('resolveComponent -> ', this.name);
-	// 	//const c = resolveComponent(this.name)
-	// 	//return h(c)
+	// 	// console.log('resolveComponent -> ', this.name);
+	// 	// //const c = resolveComponent(this.name)
+	// 	// //return h(c)
 	// 	return createVNode('h3', {
 	// 			class: 'btn'
 	// 		},
 	// 		'[ RENDER RUNTIME = ' + this.name + ']'
 	// 	);
+
+	// 	// fetch code from some external source here
+	// 	//let code = '<h2>hello</h2>';
+	// 	//let c = compile(code);
+	// 	//return h(c);
 	// },
 	setup(props) {
 		return () => {
-			const name = 'Test'
-			const c = defineAsyncComponent(() => import(`./_runtime/templates/${name}.vue`))
-
-			return h(c);
+			const name = props.name;
+			console.log('runtime.setup = ', name);
 
 			// return createVNode(
 			// 	'div', {
 			// 		class: 'btn'
 			// 	},
-			// 	'[ SETUP RUNTIME = ' + props.name + ']'
+			// 	'[ SETUP RUNTIME = ' + name + ']'
 			// )
+
+			// console.log('resolveComponent -> ', name);
+			// const c = resolveComponent(name)
+			// return h(c)
+
+			//let code = '<h2>hello</h2>';
+			//let c = compile(code);
+			//console.log(c);
+
+			const c = defineAsyncComponent(() => import(`./_runtime/templates/${name}.vue`))
+			return h(c);
+
 		}
 	}
 })

@@ -28,20 +28,23 @@ export default defineConfig(async ({
 	ssrBuild
 }) => {
 	//const data = await asyncFunction()	
-	const __pathRuntimeCom = root + '/iot/src/templates';
-	
-	console.log(`\nroot = ${root}`);
-	console.log(`runtime = ${__pathRuntimeCom}`);
-	console.log(`command = ${command}`);
-	console.log(`ssrBuild = ${ssrBuild}`);
+	const __pathShared = root + '/src/_shared';
+	const __pathRuntime = root + '/src/_runtime';
 
+	console.log(`root     = ${root}`);
+	console.log(`share    = ${__pathShared}`);
+	console.log(`runtime  = ${__pathRuntime}`);
+	console.log(`command  = ${command}`);
+	console.log(`ssrBuild = ${ssrBuild}`);
 
 	return {
 		base,
+		root: root,
 		resolve: {
 			alias: {
-				'@': root,
-				'^runtimecom': __pathRuntimeCom
+				'@': root + '/src',
+				'~': __pathShared,
+				'^': __pathRuntime,
 			},
 		},
 		plugins: [
