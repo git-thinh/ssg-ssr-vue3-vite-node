@@ -53,8 +53,9 @@ export default defineComponent({
 			//let c = compile(code);
 			//console.log(c);
 
-			const c = defineAsyncComponent(() => import(`./_runtime/templates/${name}.vue`))
-			return h(c);
+			//const MyComponent = () => import(`./_shared/components/${name}.umd.min.js`);
+			const MyComponent = defineAsyncComponent(() => import(`./_runtime/templates/${name}.vue`))
+			return h(MyComponent);
 
 		}
 	}

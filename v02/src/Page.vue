@@ -2,6 +2,7 @@
 	<h1>Page All: pageKey = {{pageKey}}</h1>
 	<component :is="c"></component>
 	<Runtime :name="'rtTestRuntime'" />
+	<MyComponent></MyComponent>
 </template>
 
 <script setup>
@@ -24,13 +25,10 @@
 	const pageKey = route.params.pageKey || '';
 	const name = 'rtTestRuntime';
 
-	let updatedCmp = defineComponent({
-		template: '<div>test Me!</div>'
-	})
-	let c = h(updatedCmp);
-
 	function loadTest(file) {
 		return defineAsyncComponent(() => import(`^/templates/${file}.vue`))
 	}
-	//let c = loadTest(name);
+	let c = loadTest(name);
+	
+	const MyComponent = () => import(`./_shared/components/${name}.umd.min.js`);
 </script>

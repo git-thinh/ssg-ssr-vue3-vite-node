@@ -19,6 +19,7 @@
 	"dependencies": {
 		"@vitejs/plugin-vue": "^3.1.0",
 		"@vitejs/plugin-vue-jsx": "^2.0.1",
+		"@vue/cli-service": "^5.0.8",
 		"@vueuse/core": "^9.2.0",
 		"example-external-component": "file:example-external-component",
 		"lodash": "^4.17.21",
