@@ -11,7 +11,10 @@ const {
 	render
 } = await import('../dist/server/entry-server.js')
 
-const urls = ['/'];
+const urls = [
+	'/',
+	'/demo'
+];
 
 (async () => {
 	// pre-render each route...
