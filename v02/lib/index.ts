@@ -1,4 +1,6 @@
-import TestJs from './TestJs.vue'
+import LibTest01 from './LibTest01.vue'
+import LibTest02 from './LibTest02.vue'
 export { 
-	TestJs 
+	LibTest01,
+	LibTest02,
 }

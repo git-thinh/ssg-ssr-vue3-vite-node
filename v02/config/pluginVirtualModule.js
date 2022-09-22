@@ -1,4 +1,7 @@
 
+// https://vitejs.dev/guide/api-plugin.html
+// https://vitejs.dev/guide/api-plugin.html#virtual-modules-convention
+
 const pluginVirtualModule = () => {
 	const virtualFile = '@virtual-file'
 	const virtualId = '\0' + virtualFile

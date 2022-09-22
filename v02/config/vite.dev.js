@@ -13,6 +13,7 @@ import {
 import pluginVirtualModule from './pluginVirtualModule'
 import pluginVirtualFoo from './pluginVirtualFoo'
 import configBuild from './configBuild'
+import pluginDataBinding from './pluginData'
 
 const base = '/test/'
 const root = process.cwd()
@@ -21,6 +22,7 @@ const root = process.cwd()
 // if Vite incorrectly load this file, node.js would error out.
 globalThis.__vite_test_filename = __filename
 globalThis.__vite_test_dirname = __dirname
+
 
 export default defineConfig(async ({
 	command,
@@ -53,6 +55,21 @@ export default defineConfig(async ({
 			pluginVirtualFoo(command, ssrBuild),
 			pluginVirtualModule(),
 			pluginSSRBuiltUrl(base),
+			pluginDataBinding(),
+			{
+				buildStart() {
+					console.log('----------- buildStart ---------------');
+				},
+				transform() {
+					//console.log('------------ transform ----------------');
+				},
+				buildEnd() {
+					console.log('------------ buildEnd ----------------');
+				},
+				closeBundle() {
+					console.log('------------ closeBundle ----------------');
+				},
+			},
 		],
 		experimental: experimentalBuiltUrl(),
 		build: configBuild(root),

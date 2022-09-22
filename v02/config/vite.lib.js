@@ -38,6 +38,20 @@ export default defineConfig(async ({
 			vue({
 				reactivityTransform: true,
 			}),
+			{
+				buildStart() {
+					console.log('----------- buildStart ---------------');
+				},
+				transform() {
+					console.log('------------ transform ----------------');
+				},
+				buildEnd() {
+					console.log('------------ buildEnd ----------------');
+				},
+				closeBundle() {
+					console.log('------------ closeBundle ----------------');
+				},
+			},
 		]
 	};
 })
