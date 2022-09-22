@@ -14,7 +14,9 @@
 		"build:client": "vite build --ssrManifest --outDir dist/client --config ./config/vite.dev.js",
 		"build:server": "vite build --ssr src/entry-server.js --outDir dist/server --config ./config/vite.dev.js",
 		"build:server:noExternal": "vite build --config ./config/vite.config.noexternal.js --ssr src/entry-server.js --outDir dist/server",
-		"debug": "node --inspect-brk server"
+		"debug": "node --inspect-brk server",
+		"------------------------------------------":"",
+		"lib":"vite build --config ./config/vite.lib.js"
 	},
 	"dependencies": {
 		"@vitejs/plugin-vue": "^3.1.0",

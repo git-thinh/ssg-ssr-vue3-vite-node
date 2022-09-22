@@ -2,10 +2,15 @@
 	<h1>Page All: pageKey = {{pageKey}}</h1>
 	<component :is="c"></component>
 	<Runtime :name="'rtTestRuntime'" />
-	<MyComponent></MyComponent>
+	<h1>Custom Element Demo</h1>
+	<TestJs/>
 </template>
 
 <script setup>
+	import {
+		TestJs
+	} from './_shared/components/lib-test.js'
+	
 	import Runtime from '@/runtime'
 	import {
 		h,
@@ -29,6 +34,9 @@
 		return defineAsyncComponent(() => import(`^/templates/${file}.vue`))
 	}
 	let c = loadTest(name);
-	
-	const MyComponent = () => import(`./_shared/components/${name}.umd.min.js`);
+
+
+	//const MyComponent = () => import(`./_shared/components/${name}.umd.min.js`);
+	//const MyComponent = async () => await import(`./_shared/components/rtTestRuntime.umd.min.js`).then(o => o.default);
+	//console.log(MyComponent);
 </script>
