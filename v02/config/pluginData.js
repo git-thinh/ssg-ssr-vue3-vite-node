@@ -5,12 +5,24 @@
 import path from 'path'
 import fs from 'fs'
 
+const htmlPlugin = () => {
+	return {
+		name: 'html-transform',
+		transformIndexHtml(html) {
+			return html.replace(
+				/<title>(.*?)<\/title>/,
+				`<title>Title replaced!</title>`
+			)
+		}
+	}
+}
+
 export default (options) => ({
 	name: 'data-binding',
 	configureServer(server) {
 		// return a post hook that is called after internal middlewares are
 		// installed
-		return () => {			
+		return () => {
 			server.middlewares.use((req, res, next) => {
 				// Check extensionless URLs but ignore the `/` root path
 				// if (req.originalUrl.length > 1 && !path.extname(req.originalUrl)) {
@@ -19,7 +31,7 @@ export default (options) => ({
 				//   }
 				// }
 				// next()
-			
+
 				const url = req.url;
 				if (url === '/__data.js') {
 					console.log('PD.URL = ', url);
@@ -29,7 +41,7 @@ export default (options) => ({
 					return;
 				}
 				next()
-			
+
 			})
 		}
 	}
