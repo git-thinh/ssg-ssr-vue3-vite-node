@@ -8,12 +8,12 @@
 <script>
 	//https://github.com/vueuse/vueuse
 	//https://vueuse.org/core/useelementvisibility/#type-declarations
-	// import {
-	// 	ref
-	// } from 'vue'
-	// import {
-	// 	useElementVisibility
-	// } from '@vueuse/core'
+	import {
+		ref
+	} from 'vue'
+	import {
+		useElementVisibility
+	} from '@vueuse/core'
 
 	export default {
 		setup() {
